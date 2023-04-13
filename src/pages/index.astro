@@ -1,9 +1,9 @@
 ---
 import { Icon } from 'astro-icon';
-import Layout from '../layouts/Layout.astro';
+import SimpleLayout from '../layouts/SimpleLayout.astro';
 ---
 
-<Layout title="IFPB">
+<SimpleLayout title="Github do IFPB">
   <header
     class="bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] px-8"
   >
@@ -643,4 +643,63 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
   </main>
-</Layout>
+  <footer>
+    <div
+      class="container lg:max-w-screen-lg mx-auto py-16 px-8 flex gap-10 justify-between items-center"
+    >
+      <a href="/" class="max-sm:hidden">
+        <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-20" />
+      </a>
+      <div
+        class="flex flex-col min-[425px]:flex-row min-[425px]:justify-between gap-10"
+      >
+        <section>
+          <h1 class="font-semibold">Códigos</h1>
+          <ul>
+            <li>
+              <a href="https://ifpb.github.io/projects/codes/page/1/">
+                Projetos
+              </a>
+            </li>
+            <li>
+              <a href="https://ifpb.github.io/projects/students/page/1/">
+                Alunos
+              </a>
+            </li>
+            <li>
+              <a href="https://ifpb.github.io/exercises/">Exercícios</a>
+            </li>
+            <li>
+              <a href="https://joaopessoa.ifpb.edu.br/horario/">Horários</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1 class="font-semibold">Cursos</h1>
+          <ul>
+            <li>
+              <a href="https://estudante.ifpb.edu.br/cursos/39/">
+                Sistemas para Internet
+              </a>
+            </li>
+            <li>
+              <a href="https://estudante.ifpb.edu.br/cursos/37/">
+                Redes de Computadores
+              </a>
+            </li>
+            <li>
+              <a href="https://estudante.ifpb.edu.br/cursos/183/">
+                Informática
+              </a>
+            </li>
+            <li>
+              <a href="https://estudante.ifpb.edu.br/cursos/195/">
+                Tecnologia da Informação
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </footer>
+</SimpleLayout>
