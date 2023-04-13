@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="IFPB">
   <header
-    class="bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] w-full"
+    class="bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] px-8"
   >
     <div
       class="container lg:max-w-screen-lg mx-auto py-4 flex justify-between items-center"
@@ -28,7 +28,9 @@ import Layout from '../layouts/Layout.astro';
   </header>
   <main>
     <section id="subjects" class="subjects-section bg-white px-8 py-16">
-      <div class="container lg:max-w-screen-lg mx-auto flex gap-10">
+      <div
+        class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
+      >
         <div>
           <h2 class="text-4xl font-bold mb-4">Disciplinas</h2>
           <p class="mb-4">
@@ -43,7 +45,9 @@ import Layout from '../layouts/Layout.astro';
             <Icon name="ic:round-keyboard-double-arrow-right" size={24} />
           </a>
         </div>
-        <div class="grid grid-cols-4 gap-5 items-stretch">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch"
+        >
           <a href="https://ifpb.github.io/lm/" target="_blank">
             <div
               class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4"
@@ -140,7 +144,9 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </section>
     <section id="projects" class="projects-section bg-[#0B3314] px-8 py-16">
-      <div class="container lg:max-w-screen-lg mx-auto flex gap-10">
+      <div
+        class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
+      >
         <div
           class="grid justify-items-stretch gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
         >
@@ -266,7 +272,7 @@ import Layout from '../layouts/Layout.astro';
             </p>
           </div>
         </div>
-        <div class="text-white">
+        <div class="text-white max-sm:-order-1">
           <h2 class="text-4xl font-bold mb-4">Projetos</h2>
           <p class="mb-4">
             Esse é um preview dos vários projetos feitos pelos nossos alunos.
@@ -287,7 +293,9 @@ import Layout from '../layouts/Layout.astro';
       id="students"
       class="students-section bg-black text-white px-8 py-16"
     >
-      <div class="container lg:max-w-screen-lg mx-auto flex gap-10">
+      <div
+        class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
+      >
         <div>
           <h2 class="text-4xl font-bold mb-4">Alunos</h2>
           <p class="mb-4">
@@ -304,7 +312,7 @@ import Layout from '../layouts/Layout.astro';
             </a>
           </p>
         </div>
-        <div class="text-black grid grid-cols-4 gap-5">
+        <div class="text-black grid grid-cols-1 md:grid-cols-4 gap-5">
           <div
             class="student-card student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
             data-tags="2011.1-cstsi-cstsi-2011.1-egresso-ifpb-jp-noCode"
