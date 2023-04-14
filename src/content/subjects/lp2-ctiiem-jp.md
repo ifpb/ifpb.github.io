@@ -1,9 +1,9 @@
 ---
-id: lp2-ctii-jp
+id: lp2-ctiiem-jp
 name: Linguagem de Programação II
 abbreviation: lp2
 description: Apresenta os conceitos de como construir uma aplicação Web com Back-end integrado com Front-end.
-course: ctii
+course: ctiiem
 campus: ifpb-jp
 repository: https://github.com/ifpb/lp2
 preview: https://ifpb.github.io/lp2/
