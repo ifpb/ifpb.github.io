@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  student: CollectionEntry<'students'>;
+}
+
+const { student } = Astro.props;
+
+const icons = [
+  {
+    name: 'code',
+    icon: 'ph:code',
+  },
+  {
+    name: 'linkedin',
+    icon: 'ph:linkedin-logo',
+  },
+  {
+    name: 'github',
+    icon: 'icon-park:github-one',
+  },
+  {
+    name: 'twitter',
+    icon: 'ph:twitter-logo',
+  },
+  {
+    name: 'instagram',
+    icon: 'ph:instagram-logo',
+  },
+];
+
+const links = icons
+  .filter((link) => student.data.addresses[link.name])
+  .map((link) => ({
+    ...link,
+    url: student.data.addresses[link.name],
+  }));
+---
+
+<div
+  class="student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
+>
+  <figure class="mx-auto overflow-hidden">
+    <a href={student.data.addresses.linkedin} target="_blank">
+      <img
+        src={student.data.avatar}
+        alt={student.data.name.full}
+        class="bg-gray-300 object-cover hover:scale-105 transition duration-500 cursor-pointer"
+        onload="this.onload=null;this.classList.remove('animate-pulse');"
+        onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/imgs/avatar.svg';"
+      />
+    </a>
+  </figure>
+  <div>
+    <div class="px-6 py-2">
+      <div class="font-bold text-sm">{student.data.name.compact}</div>
+    </div>
+    <div class="flex justify-center pb-2">
+      {
+        links.map((link) => (
+          <a
+            href={link.url}
+            target="_blank"
+            class="hover:scale-110 transition duration-500"
+          >
+            <Icon
+              name={link.icon}
+              size={32}
+              class={`${link.name}-student-link`}
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</div>

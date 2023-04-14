@@ -1,5 +1,6 @@
 ---
-title: Linguagem de Marcarção
+id: lm-cstsi-jp
+name: Linguagem de Marcarção
 abbreviation: lm
 description: Ajuda a construir páginas estruturadas com HTML e estilizadas com CSS, além do uso de bibliotecas CSS.
 course: cstsi

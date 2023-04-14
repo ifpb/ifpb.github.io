@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+
+const projectId = project?.data?.repository
+  ?.split('github.com/')
+  ?.at(-1)
+  ?.replace('/', '-');
+---
+
+<div
+  class="project-card rounded-md overflow-hidden shadow-lg bg-white text-center"
+>
+  <section class="relative">
+    <figure class="overflow-hidden">
+      <a href={project.data.page} target="_blank">
+        <img
+          src={project.data.preview ?? '/imgs/project-placeholder.png'}
+          alt={project.data.title}
+          class="bg-gray-300 object-cover w-full h-[200px] md:h-[150px] hover:scale-105 transition duration-500"
+          onload="this.onload=null;this.classList.remove('animate-pulse');"
+          onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/imgs/project-placeholder.png';"
+        />
+      </a>
+    </figure>
+    <div class="absolute top-2 right-2">
+      <a href={project.data.repository} target="_blank" class="font-bold">
+        <Icon name="uim:github" size={32} class="github-project-link" />
+      </a>
+    </div>
+    <ul class="absolute bottom-2 right-4 flex">
+      {
+        project.data.owners.map((owner) => (
+          <li class="-mr-2 border-2 border-gray-100 rounded-full">
+            <a href={owner.github} target="_blank">
+              <img
+                src={`${owner.avatar}?size=32`}
+                alt={owner.name}
+                title={owner.name}
+                class="rounded-full"
+              />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <p class="my-3">
+    <a
+      href={`https://ifpb.github.io/projects/codes/${projectId}`}
+      target="_blank"
+      class="font-bold"
+    >
+      {project.data.title}
+    </a>
+  </p>
+</div>

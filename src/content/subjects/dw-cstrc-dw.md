@@ -1,5 +1,6 @@
 ---
-title: Desenvolvimento Web
+id: dw-cstrc-dw
+name: Desenvolvimento Web
 abbreviation: dw
 description: Aborda os conteitos básicos do desenvolvimento de sistemas Web utilizando banco de dados.
 course: cstrc

@@ -1,31 +1,45 @@
 ---
 import { Icon } from 'astro-icon';
+import { getCollection } from 'astro:content';
 import SimpleLayout from '../layouts/SimpleLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SubjectCard from '../components/SubjectCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import StudentCard from '../components/StudentCard.astro';
+
+const menu = [
+  {
+    name: 'Disciplinas',
+    link: '#subjects',
+  },
+  {
+    name: 'Projetos',
+    link: '#projects',
+  },
+  {
+    name: 'Estudantes',
+    link: '#students',
+  },
+];
+
+const selectedSubjects = [
+  'lm-cstsi-jp',
+  'bd-mpti-jp',
+  'ped-cstrc-jp',
+  'lp2-ctii-jp',
+];
+
+const subjects = (await getCollection('subjects')).filter((subject) =>
+  selectedSubjects.includes(subject.data.id)
+);
+const projects = await getCollection('projects');
+
+const students = await getCollection('students');
 ---
 
 <SimpleLayout title="Github do IFPB">
-  <header
-    class="bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] px-8"
-  >
-    <div
-      class="container lg:max-w-screen-lg mx-auto py-4 flex justify-between items-center"
-    >
-      <a href="/">
-        <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-7" />
-      </a>
-      <ul class="flex text-white gap-5 font-semibold">
-        <li>
-          <a href="#subjects">Disciplinas</a>
-        </li>
-        <li>
-          <a href="#projects">Projetos</a>
-        </li>
-        <li>
-          <a href="#students">Estudantes</a>
-        </li>
-      </ul>
-    </div>
-  </header>
+  <Header menu={menu} />
   <main>
     <section id="subjects" class="subjects-section bg-white px-8 py-16">
       <div
@@ -38,7 +52,7 @@ import SimpleLayout from '../layouts/SimpleLayout.astro';
             cursos do IFPB.
           </p>
           <a
-            href="https://github.com/ifpb"
+            href="/subjects/"
             class="bg-[#0B3314] py-2 px-4 rounded-md font-semibold text-white inline-flex gap-1 items-center justify-center"
           >
             Mais disciplinas
@@ -46,100 +60,10 @@ import SimpleLayout from '../layouts/SimpleLayout.astro';
           </a>
         </div>
         <div
-          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-stretch"
+          class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-5 items-stretch"
+          style=""
         >
-          <a href="https://ifpb.github.io/lm/" target="_blank">
-            <div
-              class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4"
-            >
-              <h1 class="text-xl font-bold mb-4">Linguagem de Marcação</h1>
-              <p class="mb-4">
-                Ajuda a construir páginas estruturadas com HTML e estilizadas
-                com CSS, além do uso de bibliotecas CSS.
-              </p>
-              <ul class="flex">
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  cstsi
-                </li>
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  ifpb-jp
-                </li>
-              </ul>
-            </div>
-          </a>
-          <a href="https://ifpb.github.io/ls/" target="_blank">
-            <div
-              class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4"
-            >
-              <h1 class="text-xl font-bold mb-4">Linguagem de Script</h1>
-              <p class="mb-4">
-                Exibe a utilização da linguagem JavaScript no Web Front-end, e
-                de uso de componentes de Interface.
-              </p>
-              <ul class="flex">
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  cstsi
-                </li>
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  ifpb-jp
-                </li>
-              </ul>
-            </div>
-          </a>
-          <a href="https://ifpb.github.io/dw/" target="_blank">
-            <div
-              class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4"
-            >
-              <h1 class="text-xl font-bold mb-4">Programação Web</h1>
-              <p class="mb-4">
-                Aborda os conteitos básicos do desenvolvimento de sistemas Web
-                utilizando banco de dados.
-              </p>
-              <ul class="flex">
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  cstrc
-                </li>
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  ifpb-jp
-                </li>
-              </ul>
-            </div>
-          </a>
-          <a href="https://ifpb.github.io/lp2/" target="_blank">
-            <div
-              class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4"
-            >
-              <h1 class="text-xl font-bold mb-4">Linguagem de Progamação 2</h1>
-              <p class="mb-4">
-                Apresenta os conceitos de como construir uma aplicação Web com
-                Back-end integrado com Front-end.
-              </p>
-              <ul class="flex">
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  ctii
-                </li>
-                <li
-                  class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full"
-                >
-                  ifpb-jp
-                </li>
-              </ul>
-            </div>
-          </a>
+          {subjects.map((subject) => <SubjectCard subject={subject} />)}
         </div>
       </div>
     </section>
@@ -147,132 +71,7 @@ import SimpleLayout from '../layouts/SimpleLayout.astro';
       <div
         class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
       >
-        <div
-          class="grid justify-items-stretch gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-        >
-          <div
-            class="project-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-          >
-            <section class="relative">
-              <figure class="overflow-hidden">
-                <a href="https://ifpb.github.io/exercises/" target="_blank">
-                  <img
-                    src="https://raw.githubusercontent.com/ifpb/exercises/main/preview.png"
-                    class="bg-gray-300 object-cover w-full h-[200px] md:h-[150px] hover:scale-105 transition duration-500"
-                    alt="IFPB Exercises"
-                    onload="this.onload=null;this.classList.remove('animate-pulse');"
-                    onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/project-placeholder.png';"
-                  />
-                </a>
-              </figure>
-              <div class="absolute top-2 right-2">
-                <a
-                  href="https://github.com/ifpb/exercises"
-                  target="_blank"
-                  class="font-bold"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="github-project-link"
-                    width="32"
-                    height="32"
-                    astro-icon="uim:github"
-                    ><path
-                      fill="currentColor"
-                      d="M8.854 21.57a9.91 9.91 0 0 0 6.29.001.493.493 0 0 1-.644-.475c0-.338.013-1.413.013-2.75a2.368 2.368 0 0 0-.675-1.85c2.225-.25 4.562-1.1 4.562-4.938a3.87 3.87 0 0 0-1.025-2.687 3.594 3.594 0 0 0-.1-2.65s-.838-.275-2.75 1.025a9.427 9.427 0 0 0-5 0C7.612 5.958 6.775 6.22 6.775 6.22a3.593 3.593 0 0 0-.1 2.65 3.892 3.892 0 0 0-1.025 2.687c0 3.825 2.325 4.688 4.55 4.938a2.106 2.106 0 0 0-.638 1.337 2.137 2.137 0 0 1-2.91-.82l-.002-.005a2.001 2.001 0 0 0-1.538-1.025c-.837.013-.337.475.013.663.451.38.803.865 1.025 1.412.2.563.85 1.638 3.362 1.175 0 .838.013 1.625.013 1.863 0 .259-.185.551-.67.475z"
-                      class="uim-tertiary"
-                      opacity=".5"></path><path
-                      fill="currentColor"
-                      d="M12 2.083c-5.523 0-10 4.477-10 10 0 4.423 2.875 8.169 6.855 9.488.485.075.67-.216.67-.475 0-.238-.012-1.025-.012-1.863-2.513.463-3.163-.612-3.363-1.175a3.637 3.637 0 0 0-1.025-1.412c-.35-.188-.85-.65-.013-.663a2 2 0 0 1 1.538 1.025l.003.006a2.137 2.137 0 0 0 2.91.82c.043-.51.27-.984.637-1.338-2.225-.25-4.55-1.113-4.55-4.938a3.892 3.892 0 0 1 1.025-2.687 3.594 3.594 0 0 1 .1-2.65s.837-.263 2.75 1.025a9.427 9.427 0 0 1 5 0c1.912-1.3 2.75-1.025 2.75-1.025.37.838.406 1.786.1 2.65a3.87 3.87 0 0 1 1.025 2.687c0 3.838-2.338 4.688-4.562 4.938.482.49.729 1.164.675 1.85 0 1.337-.013 2.412-.013 2.75a.493.493 0 0 0 .643.476C19.124 20.253 22 16.507 22 12.083c0-5.523-4.477-10-10-10z"
-                      class="uim-primary"></path></svg
-                  >
-                </a>
-              </div>
-              <ul class="absolute bottom-2 right-4 flex">
-                <li class="-mr-2 border-2 border-gray-100 rounded-full">
-                  <a href="https://github.com/lucachaves" target="_blank">
-                    <img
-                      src="https://github.com/lucachaves.png?size=32"
-                      alt="Luiz Carlos Rodrigues Chaves"
-                      title="Luiz Carlos Rodrigues Chaves"
-                      class="rounded-full"
-                    />
-                  </a>
-                </li>
-              </ul>
-            </section>
-            <p class="my-3">
-              <a
-                href="/projects/codes/ifpb-exercises"
-                target="_blank"
-                class="font-bold"
-              >
-                IFPB Exercises
-              </a>
-            </p>
-          </div><div
-            class="project-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-          >
-            <section class="relative">
-              <figure class="overflow-hidden">
-                <a href="https://ifpb.github.io/projects/" target="_blank">
-                  <img
-                    src="https://raw.githubusercontent.com/ifpb/projects/main/preview.png"
-                    class="bg-gray-300 object-cover w-full h-[200px] md:h-[150px] hover:scale-105 transition duration-500"
-                    alt="IFPB Projects"
-                    onload="this.onload=null;this.classList.remove('animate-pulse');"
-                    onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/project-placeholder.png';"
-                  />
-                </a>
-              </figure>
-              <div class="absolute top-2 right-2">
-                <a
-                  href="https://github.com/ifpb/projects"
-                  target="_blank"
-                  class="font-bold"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    class="github-project-link"
-                    width="32"
-                    height="32"
-                    astro-icon="uim:github"
-                    ><path
-                      fill="currentColor"
-                      d="M8.854 21.57a9.91 9.91 0 0 0 6.29.001.493.493 0 0 1-.644-.475c0-.338.013-1.413.013-2.75a2.368 2.368 0 0 0-.675-1.85c2.225-.25 4.562-1.1 4.562-4.938a3.87 3.87 0 0 0-1.025-2.687 3.594 3.594 0 0 0-.1-2.65s-.838-.275-2.75 1.025a9.427 9.427 0 0 0-5 0C7.612 5.958 6.775 6.22 6.775 6.22a3.593 3.593 0 0 0-.1 2.65 3.892 3.892 0 0 0-1.025 2.687c0 3.825 2.325 4.688 4.55 4.938a2.106 2.106 0 0 0-.638 1.337 2.137 2.137 0 0 1-2.91-.82l-.002-.005a2.001 2.001 0 0 0-1.538-1.025c-.837.013-.337.475.013.663.451.38.803.865 1.025 1.412.2.563.85 1.638 3.362 1.175 0 .838.013 1.625.013 1.863 0 .259-.185.551-.67.475z"
-                      class="uim-tertiary"
-                      opacity=".5"></path><path
-                      fill="currentColor"
-                      d="M12 2.083c-5.523 0-10 4.477-10 10 0 4.423 2.875 8.169 6.855 9.488.485.075.67-.216.67-.475 0-.238-.012-1.025-.012-1.863-2.513.463-3.163-.612-3.363-1.175a3.637 3.637 0 0 0-1.025-1.412c-.35-.188-.85-.65-.013-.663a2 2 0 0 1 1.538 1.025l.003.006a2.137 2.137 0 0 0 2.91.82c.043-.51.27-.984.637-1.338-2.225-.25-4.55-1.113-4.55-4.938a3.892 3.892 0 0 1 1.025-2.687 3.594 3.594 0 0 1 .1-2.65s.837-.263 2.75 1.025a9.427 9.427 0 0 1 5 0c1.912-1.3 2.75-1.025 2.75-1.025.37.838.406 1.786.1 2.65a3.87 3.87 0 0 1 1.025 2.687c0 3.838-2.338 4.688-4.562 4.938.482.49.729 1.164.675 1.85 0 1.337-.013 2.412-.013 2.75a.493.493 0 0 0 .643.476C19.124 20.253 22 16.507 22 12.083c0-5.523-4.477-10-10-10z"
-                      class="uim-primary"></path></svg
-                  >
-                </a>
-              </div>
-              <ul class="absolute bottom-2 right-4 flex">
-                <li class="-mr-2 border-2 border-gray-100 rounded-full">
-                  <a href="https://github.com/lucachaves" target="_blank">
-                    <img
-                      src="https://github.com/lucachaves.png?size=32"
-                      alt="Luiz Carlos Rodrigues Chaves"
-                      title="Luiz Carlos Rodrigues Chaves"
-                      class="rounded-full"
-                    />
-                  </a>
-                </li>
-              </ul>
-            </section>
-            <p class="my-3">
-              <a
-                href="/projects/codes/ifpb-projects"
-                target="_blank"
-                class="font-bold"
-              >
-                IFPB Projects
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="text-white max-sm:-order-1">
+        <div class="text-white -order-1 md:order-1">
           <h2 class="text-4xl font-bold mb-4">Projetos</h2>
           <p class="mb-4">
             Esse é um preview dos vários projetos feitos pelos nossos alunos.
@@ -286,6 +85,11 @@ import SimpleLayout from '../layouts/SimpleLayout.astro';
               <Icon name="ic:round-keyboard-double-arrow-right" size={24} />
             </a>
           </p>
+        </div>
+        <div
+          class="grid justify-items-stretch gap-5 grid-cols-1 md:grid-cols-[repeat(2,_auto)] lg:grid-cols-3"
+        >
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
       </div>
     </section>
@@ -313,393 +117,10 @@ import SimpleLayout from '../layouts/SimpleLayout.astro';
           </p>
         </div>
         <div class="text-black grid grid-cols-1 md:grid-cols-4 gap-5">
-          <div
-            class="student-card student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-            data-tags="2011.1-cstsi-cstsi-2011.1-egresso-ifpb-jp-noCode"
-          >
-            <figure class="mx-auto overflow-hidden">
-              <a href="https://www.linkedin.com/in/brunojppb" target="_blank">
-                <img
-                  src="https://github.com/brunojppb.png"
-                  alt="Bruno de Araújo Paulino"
-                  class="bg-gray-300 object-cover hover:scale-105 transition duration-500 cursor-pointer"
-                  onload="this.onload=null;this.classList.remove('animate-pulse');"
-                  onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/avatar.svg';"
-                />
-              </a>
-            </figure>
-            <div>
-              <div class="px-6 py-2">
-                <div class="font-bold text-sm">Bruno Paulino</div>
-              </div>
-              <div class="flex justify-center pb-2">
-                <a
-                  href="https://www.linkedin.com/in/brunojppb"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="linkedin-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:linkedin-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M100 80a12 12 0 1 1-12-12 12 12 0 0 1 12 12zm128-36v168a16 16 0 0 1-16 16H44a16 16 0 0 1-16-16V44a16 16 0 0 1 16-16h168a16 16 0 0 1 16 16zm-16 168V44H44v168zM88 104a8 8 0 0 0-8 8v64a8 8 0 0 0 16 0v-64a8 8 0 0 0-8-8zm60 0a36 36 0 0 0-20.2 6.2A8 8 0 0 0 112 112v64a8 8 0 0 0 16 0v-36a20 20 0 0 1 40 0v36a8 8 0 0 0 16 0v-36a36 36 0 0 0-36-36z"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://github.com/brunojppb"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 48 48"
-                    class="github-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="icon-park:github-one"
-                    ><path
-                      fill="none"
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-width="4"
-                      d="M29.344 30.477c2.404-.5 4.585-1.366 6.28-2.638C38.52 25.668 40 22.314 40 19c0-2.325-.881-4.495-2.407-6.333-.85-1.024 1.636-8.667-.573-7.638-2.21 1.03-5.45 3.308-7.147 2.805A20.712 20.712 0 0 0 24 7c-1.8 0-3.532.223-5.147.635C16.505 8.232 14.259 6 12 5.029c-2.26-.97-1.026 6.934-1.697 7.766C8.84 14.605 8 16.729 8 19c0 3.314 1.79 6.668 4.686 8.84 1.93 1.446 4.348 2.368 7.054 2.822m0 0c-1.158 1.275-1.738 2.486-1.738 3.633v8.716m11.342-12.534c1.098 1.44 1.647 2.734 1.647 3.88v8.654M6 31.216c.899.11 1.566.523 2 1.24.652 1.074 3.074 5.062 5.825 5.062h4.177"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://twitter.com/brunojppb"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="twitter-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:twitter-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M247.4 68.9A8 8 0 0 0 240 64h-30.4a47.8 47.8 0 0 0-75.2-10.1A47.7 47.7 0 0 0 120 88v6.1C79.3 83.5 46 50.7 45.7 50.3a8 8 0 0 0-8.1-1.9 8.1 8.1 0 0 0-5.5 6.2c-8.7 48.2 5.8 80.5 19.5 99.1a108.6 108.6 0 0 0 24.7 24.4c-15.3 17.3-38.9 26.3-39.1 26.4a8 8 0 0 0-3.9 11.9c.8 1.2 3.8 5.1 11.1 8.8 9.1 4.5 21.1 6.8 35.6 6.8 70.5 0 129.5-54.3 135.5-124.2l30.2-30.1a8.4 8.4 0 0 0 1.7-8.8zm-45.3 29.7a7.8 7.8 0 0 0-2.3 5.2C195.7 166.7 143.1 216 80 216c-10.6 0-18-1.4-23.2-3.1 11.5-6.2 27.5-17 37.9-32.5a8 8 0 0 0 1-6.4 8.1 8.1 0 0 0-4.1-5.1c-.1-.1-14.9-7.8-27.6-25.3-14.4-19.8-20.5-43.9-18.1-71.7 15.8 13 46 34.2 80.8 40a8.1 8.1 0 0 0 6.5-1.8 8.2 8.2 0 0 0 2.8-6.1V88a32 32 0 0 1 61.3-12.8 8.1 8.1 0 0 0 7.4 4.8h16z"
-                    ></path></svg
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="student-card student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-            data-tags="2006.1-cstsi-cstsi-2006.1-egresso-ifpb-jp-noCode"
-          >
-            <figure class="mx-auto overflow-hidden">
-              <a
-                href="http://linkedin.com/in/diego-pessoa-6a137b28/"
-                target="_blank"
-              >
-                <img
-                  src="https://github.com/diegoep.png"
-                  alt="Diego Ernesto Rosa Pessoa"
-                  class="bg-gray-300 object-cover hover:scale-105 transition duration-500 cursor-pointer"
-                  onload="this.onload=null;this.classList.remove('animate-pulse');"
-                  onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/avatar.svg';"
-                />
-              </a>
-            </figure>
-            <div>
-              <div class="px-6 py-2">
-                <div class="font-bold text-sm">Diego Pessoa</div>
-              </div>
-              <div class="flex justify-center pb-2">
-                <a
-                  href="http://linkedin.com/in/diego-pessoa-6a137b28/"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="linkedin-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:linkedin-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M100 80a12 12 0 1 1-12-12 12 12 0 0 1 12 12zm128-36v168a16 16 0 0 1-16 16H44a16 16 0 0 1-16-16V44a16 16 0 0 1 16-16h168a16 16 0 0 1 16 16zm-16 168V44H44v168zM88 104a8 8 0 0 0-8 8v64a8 8 0 0 0 16 0v-64a8 8 0 0 0-8-8zm60 0a36 36 0 0 0-20.2 6.2A8 8 0 0 0 112 112v64a8 8 0 0 0 16 0v-36a20 20 0 0 1 40 0v36a8 8 0 0 0 16 0v-36a36 36 0 0 0-36-36z"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://github.com/diegoep"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 48 48"
-                    class="github-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="icon-park:github-one"
-                    ><path
-                      fill="none"
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-width="4"
-                      d="M29.344 30.477c2.404-.5 4.585-1.366 6.28-2.638C38.52 25.668 40 22.314 40 19c0-2.325-.881-4.495-2.407-6.333-.85-1.024 1.636-8.667-.573-7.638-2.21 1.03-5.45 3.308-7.147 2.805A20.712 20.712 0 0 0 24 7c-1.8 0-3.532.223-5.147.635C16.505 8.232 14.259 6 12 5.029c-2.26-.97-1.026 6.934-1.697 7.766C8.84 14.605 8 16.729 8 19c0 3.314 1.79 6.668 4.686 8.84 1.93 1.446 4.348 2.368 7.054 2.822m0 0c-1.158 1.275-1.738 2.486-1.738 3.633v8.716m11.342-12.534c1.098 1.44 1.647 2.734 1.647 3.88v8.654M6 31.216c.899.11 1.566.523 2 1.24.652 1.074 3.074 5.062 5.825 5.062h4.177"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://twitter.com/diegopessoa/"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="twitter-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:twitter-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M247.4 68.9A8 8 0 0 0 240 64h-30.4a47.8 47.8 0 0 0-75.2-10.1A47.7 47.7 0 0 0 120 88v6.1C79.3 83.5 46 50.7 45.7 50.3a8 8 0 0 0-8.1-1.9 8.1 8.1 0 0 0-5.5 6.2c-8.7 48.2 5.8 80.5 19.5 99.1a108.6 108.6 0 0 0 24.7 24.4c-15.3 17.3-38.9 26.3-39.1 26.4a8 8 0 0 0-3.9 11.9c.8 1.2 3.8 5.1 11.1 8.8 9.1 4.5 21.1 6.8 35.6 6.8 70.5 0 129.5-54.3 135.5-124.2l30.2-30.1a8.4 8.4 0 0 0 1.7-8.8zm-45.3 29.7a7.8 7.8 0 0 0-2.3 5.2C195.7 166.7 143.1 216 80 216c-10.6 0-18-1.4-23.2-3.1 11.5-6.2 27.5-17 37.9-32.5a8 8 0 0 0 1-6.4 8.1 8.1 0 0 0-4.1-5.1c-.1-.1-14.9-7.8-27.6-25.3-14.4-19.8-20.5-43.9-18.1-71.7 15.8 13 46 34.2 80.8 40a8.1 8.1 0 0 0 6.5-1.8 8.2 8.2 0 0 0 2.8-6.1V88a32 32 0 0 1 61.3-12.8 8.1 8.1 0 0 0 7.4 4.8h16z"
-                    ></path></svg
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="student-card student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-            data-tags="2005.1-cstsi-cstsi-2005.1-código-egresso-ifpb-jp"
-          >
-            <figure class="mx-auto overflow-hidden">
-              <a
-                href="https://www.linkedin.com/in/luizcrchaves/"
-                target="_blank"
-              >
-                <img
-                  src="https://github.com/lucachaves.png"
-                  alt="Luiz Carlos Rodrigues Chaves"
-                  class="bg-gray-300 object-cover hover:scale-105 transition duration-500 cursor-pointer"
-                  onload="this.onload=null;this.classList.remove('animate-pulse');"
-                  onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/avatar.svg';"
-                />
-              </a>
-            </figure>
-            <div>
-              <div class="px-6 py-2">
-                <div class="font-bold text-sm">Luiz Chaves</div>
-              </div>
-              <div class="flex justify-center pb-2">
-                <a
-                  href="/projects/students/20051370420/"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="code-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:code"
-                    ><path
-                      fill="currentColor"
-                      d="M69.1 94.1 28.5 128l40.6 33.9a7.9 7.9 0 0 1 1.1 11.2A8.1 8.1 0 0 1 64 176a7.7 7.7 0 0 1-5.1-1.9l-48-40a7.9 7.9 0 0 1 0-12.2l48-40a8 8 0 1 1 10.2 12.2zm176 27.8-48-40a8 8 0 0 0-10.2 12.2l40.6 33.9-40.6 33.9A8 8 0 0 0 192 176a7.7 7.7 0 0 0 5.1-1.9l48-40a7.9 7.9 0 0 0 0-12.2zm-82.4-89.4a7.9 7.9 0 0 0-10.2 4.8l-64 176a7.9 7.9 0 0 0 4.8 10.2 8.6 8.6 0 0 0 2.7.5 7.9 7.9 0 0 0 7.5-5.3l64-176a7.9 7.9 0 0 0-4.8-10.2z"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://www.linkedin.com/in/luizcrchaves/"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="linkedin-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:linkedin-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M100 80a12 12 0 1 1-12-12 12 12 0 0 1 12 12zm128-36v168a16 16 0 0 1-16 16H44a16 16 0 0 1-16-16V44a16 16 0 0 1 16-16h168a16 16 0 0 1 16 16zm-16 168V44H44v168zM88 104a8 8 0 0 0-8 8v64a8 8 0 0 0 16 0v-64a8 8 0 0 0-8-8zm60 0a36 36 0 0 0-20.2 6.2A8 8 0 0 0 112 112v64a8 8 0 0 0 16 0v-36a20 20 0 0 1 40 0v36a8 8 0 0 0 16 0v-36a36 36 0 0 0-36-36z"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://github.com/lucachaves"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 48 48"
-                    class="github-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="icon-park:github-one"
-                    ><path
-                      fill="none"
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-width="4"
-                      d="M29.344 30.477c2.404-.5 4.585-1.366 6.28-2.638C38.52 25.668 40 22.314 40 19c0-2.325-.881-4.495-2.407-6.333-.85-1.024 1.636-8.667-.573-7.638-2.21 1.03-5.45 3.308-7.147 2.805A20.712 20.712 0 0 0 24 7c-1.8 0-3.532.223-5.147.635C16.505 8.232 14.259 6 12 5.029c-2.26-.97-1.026 6.934-1.697 7.766C8.84 14.605 8 16.729 8 19c0 3.314 1.79 6.668 4.686 8.84 1.93 1.446 4.348 2.368 7.054 2.822m0 0c-1.158 1.275-1.738 2.486-1.738 3.633v8.716m11.342-12.534c1.098 1.44 1.647 2.734 1.647 3.88v8.654M6 31.216c.899.11 1.566.523 2 1.24.652 1.074 3.074 5.062 5.825 5.062h4.177"
-                    ></path></svg
-                  >
-                </a><a
-                  href="http://twitter.com/luizchavesjp"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="twitter-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:twitter-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M247.4 68.9A8 8 0 0 0 240 64h-30.4a47.8 47.8 0 0 0-75.2-10.1A47.7 47.7 0 0 0 120 88v6.1C79.3 83.5 46 50.7 45.7 50.3a8 8 0 0 0-8.1-1.9 8.1 8.1 0 0 0-5.5 6.2c-8.7 48.2 5.8 80.5 19.5 99.1a108.6 108.6 0 0 0 24.7 24.4c-15.3 17.3-38.9 26.3-39.1 26.4a8 8 0 0 0-3.9 11.9c.8 1.2 3.8 5.1 11.1 8.8 9.1 4.5 21.1 6.8 35.6 6.8 70.5 0 129.5-54.3 135.5-124.2l30.2-30.1a8.4 8.4 0 0 0 1.7-8.8zm-45.3 29.7a7.8 7.8 0 0 0-2.3 5.2C195.7 166.7 143.1 216 80 216c-10.6 0-18-1.4-23.2-3.1 11.5-6.2 27.5-17 37.9-32.5a8 8 0 0 0 1-6.4 8.1 8.1 0 0 0-4.1-5.1c-.1-.1-14.9-7.8-27.6-25.3-14.4-19.8-20.5-43.9-18.1-71.7 15.8 13 46 34.2 80.8 40a8.1 8.1 0 0 0 6.5-1.8 8.2 8.2 0 0 0 2.8-6.1V88a32 32 0 0 1 61.3-12.8 8.1 8.1 0 0 0 7.4 4.8h16z"
-                    ></path></svg
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="student-card student-card rounded-md overflow-hidden shadow-lg bg-white text-center"
-            data-tags="2003.1-cstsi-cstsi-2003.1-egresso-ifpb-jp-noCode"
-          >
-            <figure class="mx-auto overflow-hidden">
-              <a
-                href="https://www.linkedin.com/in/mauriciolinhares/"
-                target="_blank"
-              >
-                <img
-                  src="https://github.com/mauricio.png"
-                  alt="Mauricio Linhares de Aragao Junior"
-                  class="bg-gray-300 object-cover hover:scale-105 transition duration-500 cursor-pointer"
-                  onload="this.onload=null;this.classList.remove('animate-pulse');"
-                  onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/projects/imgs/avatar.svg';"
-                />
-              </a>
-            </figure>
-            <div>
-              <div class="px-6 py-2">
-                <div class="font-bold text-sm">Mauricio Linhares</div>
-              </div>
-              <div class="flex justify-center pb-2">
-                <a
-                  href="https://www.linkedin.com/in/mauriciolinhares/"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="linkedin-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:linkedin-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M100 80a12 12 0 1 1-12-12 12 12 0 0 1 12 12zm128-36v168a16 16 0 0 1-16 16H44a16 16 0 0 1-16-16V44a16 16 0 0 1 16-16h168a16 16 0 0 1 16 16zm-16 168V44H44v168zM88 104a8 8 0 0 0-8 8v64a8 8 0 0 0 16 0v-64a8 8 0 0 0-8-8zm60 0a36 36 0 0 0-20.2 6.2A8 8 0 0 0 112 112v64a8 8 0 0 0 16 0v-36a20 20 0 0 1 40 0v36a8 8 0 0 0 16 0v-36a36 36 0 0 0-36-36z"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://github.com/mauricio"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 48 48"
-                    class="github-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="icon-park:github-one"
-                    ><path
-                      fill="none"
-                      stroke="#000"
-                      stroke-linecap="round"
-                      stroke-width="4"
-                      d="M29.344 30.477c2.404-.5 4.585-1.366 6.28-2.638C38.52 25.668 40 22.314 40 19c0-2.325-.881-4.495-2.407-6.333-.85-1.024 1.636-8.667-.573-7.638-2.21 1.03-5.45 3.308-7.147 2.805A20.712 20.712 0 0 0 24 7c-1.8 0-3.532.223-5.147.635C16.505 8.232 14.259 6 12 5.029c-2.26-.97-1.026 6.934-1.697 7.766C8.84 14.605 8 16.729 8 19c0 3.314 1.79 6.668 4.686 8.84 1.93 1.446 4.348 2.368 7.054 2.822m0 0c-1.158 1.275-1.738 2.486-1.738 3.633v8.716m11.342-12.534c1.098 1.44 1.647 2.734 1.647 3.88v8.654M6 31.216c.899.11 1.566.523 2 1.24.652 1.074 3.074 5.062 5.825 5.062h4.177"
-                    ></path></svg
-                  >
-                </a><a
-                  href="https://twitter.com/mauriciojr"
-                  target="_blank"
-                  class="hover:scale-110 transition duration-500"
-                >
-                  <svg
-                    viewBox="0 0 256 256"
-                    class="twitter-student-link"
-                    width="32"
-                    height="32"
-                    astro-icon="ph:twitter-logo"
-                    ><path
-                      fill="currentColor"
-                      d="M247.4 68.9A8 8 0 0 0 240 64h-30.4a47.8 47.8 0 0 0-75.2-10.1A47.7 47.7 0 0 0 120 88v6.1C79.3 83.5 46 50.7 45.7 50.3a8 8 0 0 0-8.1-1.9 8.1 8.1 0 0 0-5.5 6.2c-8.7 48.2 5.8 80.5 19.5 99.1a108.6 108.6 0 0 0 24.7 24.4c-15.3 17.3-38.9 26.3-39.1 26.4a8 8 0 0 0-3.9 11.9c.8 1.2 3.8 5.1 11.1 8.8 9.1 4.5 21.1 6.8 35.6 6.8 70.5 0 129.5-54.3 135.5-124.2l30.2-30.1a8.4 8.4 0 0 0 1.7-8.8zm-45.3 29.7a7.8 7.8 0 0 0-2.3 5.2C195.7 166.7 143.1 216 80 216c-10.6 0-18-1.4-23.2-3.1 11.5-6.2 27.5-17 37.9-32.5a8 8 0 0 0 1-6.4 8.1 8.1 0 0 0-4.1-5.1c-.1-.1-14.9-7.8-27.6-25.3-14.4-19.8-20.5-43.9-18.1-71.7 15.8 13 46 34.2 80.8 40a8.1 8.1 0 0 0 6.5-1.8 8.2 8.2 0 0 0 2.8-6.1V88a32 32 0 0 1 61.3-12.8 8.1 8.1 0 0 0 7.4 4.8h16z"
-                    ></path></svg
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
+          {students.map((student) => <StudentCard student={student} />)}
         </div>
       </div>
     </section>
   </main>
-  <footer>
-    <div
-      class="container lg:max-w-screen-lg mx-auto py-16 px-8 flex gap-10 justify-between items-center"
-    >
-      <a href="/" class="max-sm:hidden">
-        <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-20" />
-      </a>
-      <div
-        class="flex flex-col min-[425px]:flex-row min-[425px]:justify-between gap-10"
-      >
-        <section>
-          <h1 class="font-semibold">Códigos</h1>
-          <ul>
-            <li>
-              <a href="https://ifpb.github.io/projects/codes/page/1/">
-                Projetos
-              </a>
-            </li>
-            <li>
-              <a href="https://ifpb.github.io/projects/students/page/1/">
-                Alunos
-              </a>
-            </li>
-            <li>
-              <a href="https://ifpb.github.io/exercises/">Exercícios</a>
-            </li>
-            <li>
-              <a href="https://joaopessoa.ifpb.edu.br/horario/">Horários</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h1 class="font-semibold">Cursos</h1>
-          <ul>
-            <li>
-              <a href="https://estudante.ifpb.edu.br/cursos/39/">
-                Sistemas para Internet
-              </a>
-            </li>
-            <li>
-              <a href="https://estudante.ifpb.edu.br/cursos/37/">
-                Redes de Computadores
-              </a>
-            </li>
-            <li>
-              <a href="https://estudante.ifpb.edu.br/cursos/183/">
-                Informática
-              </a>
-            </li>
-            <li>
-              <a href="https://estudante.ifpb.edu.br/cursos/195/">
-                Tecnologia da Informação
-              </a>
-            </li>
-          </ul>
-        </section>
-      </div>
-    </div>
-  </footer>
+  <Footer />
 </SimpleLayout>

@@ -1,0 +1,33 @@
+---
+export interface MenuItem {
+  name: string;
+  link: string;
+}
+
+export interface Props {
+  menu: MenuItem[];
+}
+
+const { menu } = Astro.props;
+---
+
+<header
+  class="bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] px-8"
+>
+  <div
+    class="container lg:max-w-screen-lg mx-auto py-4 flex justify-between items-center"
+  >
+    <a href="/">
+      <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-7" />
+    </a>
+    <ul class="flex text-white gap-5 font-semibold">
+      {
+        menu.map(({ name, link }) => (
+          <li>
+            <a href={link}>{name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</header>

@@ -1,5 +1,6 @@
 ---
-title: Programação e Estrutura de Dados
+id: ped-cstrc-jp
+name: Programação e Estrutura de Dados
 abbreviation: ped
 description: Programação Orientada a Objetos e Estrutura de Dados
 course: cstsi

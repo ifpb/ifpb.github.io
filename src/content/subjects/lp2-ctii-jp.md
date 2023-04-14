@@ -1,5 +1,6 @@
 ---
-title: Linguagem de Programação II
+id: lp2-ctii-jp
+name: Linguagem de Programação II
 abbreviation: lp2
 description: Apresenta os conceitos de como construir uma aplicação Web com Back-end integrado com Front-end.
 course: ctii

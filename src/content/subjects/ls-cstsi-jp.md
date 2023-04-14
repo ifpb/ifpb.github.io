@@ -1,5 +1,6 @@
 ---
-title: Linguagem de Script
+id: ls-cstsi-jp
+name: Linguagem de Script
 abbreviation: ls
 description: Exibe a utilização da linguagem JavaScript no Web Front-end, e de uso de componentes de Interface.
 course: cstsi

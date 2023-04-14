@@ -1,0 +1,57 @@
+---
+import { getCollection } from 'astro:content';
+
+const courses = await getCollection('courses');
+
+courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
+---
+
+<footer>
+  <div
+    class="container lg:max-w-screen-lg mx-auto py-16 px-8 flex gap-10 justify-between items-center"
+  >
+    <a href="/" class="max-sm:hidden">
+      <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-20" />
+    </a>
+    <div
+      class="flex flex-col min-[425px]:flex-row min-[425px]:justify-between gap-10"
+    >
+      <section>
+        <h1 class="font-semibold">Projetos</h1>
+        <ul>
+          <li>
+            <a href="https://ifpb.github.io/projects/codes/page/1/">
+              Repositórios
+            </a>
+          </li>
+          <li>
+            <a href="https://ifpb.github.io/projects/students/page/1/">
+              Alunos
+            </a>
+          </li>
+          <li>
+            <a href="https://ifpb.github.io/exercises/">Exercícios</a>
+          </li>
+          <li>
+            <a href="https://github.com/ifpb/maratona-pop">Maratona POP</a>
+          </li>
+          <li>
+            <a href="https://joaopessoa.ifpb.edu.br/horario/">Horários</a>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="font-semibold">Cursos</h1>
+        <ul>
+          {
+            courses.map((course) => (
+              <li>
+                <a href={course.data.page}>{course.data.name}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</footer>

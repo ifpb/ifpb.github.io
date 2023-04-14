@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import Icon from 'astro-icon';
+import SimpleLayout from '../../layouts/SimpleLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const subjects = await getCollection('subjects');
+
+const courses = await getCollection('courses');
+
+subjects.sort((a, b) => {
+  return a.data.name.localeCompare(b.data.name);
+});
+
+const menu = [
+  {
+    name: 'Disciplinas',
+    link: '#subjects',
+  },
+];
+
+const getCourseName = (abbreviation: string) => {
+  return courses.find((course) => course?.data?.abbreviation === abbreviation);
+};
+---
+
+<SimpleLayout title="Disciplinas">
+  <Header menu={menu} />
+  <main class="container lg:max-w-screen-lg mx-auto pt-16 px-2">
+    <h1 id="subjects" class="text-4xl font-bold mb-16">Disciplinas</h1>
+    {
+      subjects.map(
+        ({
+          data: { preview, name, course, repository, professors, description },
+        }) => (
+          <div class="relative bg-gray-100 mb-4 p-4 border-l-8 border-green-900">
+            <a href={preview ?? repository}>
+              <h2 class="text-2xl font-bold mb-4 pr-2">{name}</h2>
+            </a>
+            <h2 class="text-lg font-semibold mb-1">Curso</h2>
+            <p class="mb-4">
+              {getCourseName(course)?.data?.level} em{' '}
+              {getCourseName(course)?.data?.name}
+              <span class="uppercase">
+                ({getCourseName(course)?.data?.campus})
+              </span>
+            </p>
+            <h2 class="text-lg font-semibold mb-1">Professores</h2>
+            <p class="mb-4">{professors.join(', ')}</p>
+            <h2 class="text-lg font-semibold mb-1">Descrição</h2>
+            <p class="mb-4">{description}</p>
+            <div class="absolute top-4 right-4">
+              <a
+                href={repository}
+                class="hover:text-gray-600 transition duration-500"
+              >
+                <Icon name="mdi:github" size={30} class="github-project-link" />
+              </a>
+            </div>
+          </div>
+        )
+      )
+    }
+  </main>
+  <Footer />
+</SimpleLayout>
