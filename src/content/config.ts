@@ -1,13 +1,26 @@
 import { z, defineCollection } from 'astro:content';
 
+const campus = z.enum(['ifpb-jp', 'ifpb-cg', 'ifpb-gb', 'reitoria']);
+
+const course = z.enum([
+  'cstsi',
+  'cstrc',
+  'csbee',
+  'csbes',
+  'cmpti',
+  'cstt',
+  'ctie',
+  'ctii',
+]);
+
 const subjectCollection = defineCollection({
   schema: z.object({
     id: z.string(),
     name: z.string(),
     abbreviation: z.string(),
     description: z.string(),
-    course: z.string(),
-    campus: z.string(),
+    course,
+    campus,
     repository: z.string().url(),
     preview: z.string().url().optional(),
     professors: z.array(z.string()),
@@ -19,13 +32,36 @@ const courseCollection = defineCollection({
     id: z.string(),
     name: z.string(),
     abbreviation: z.string(),
-    level: z.string(),
-    campus: z.string(),
+    level: z.object({
+      compact: z.string(),
+      full: z.string(),
+    }),
+    campus,
     page: z.string(),
   }),
 });
 
-const studentCollection = defineCollection({
+const occupationProfessor = z.object({
+  id: z.number(),
+  type: z.literal('professor'),
+  campus,
+});
+
+const occupationEmployee = z.object({
+  id: z.number(),
+  type: z.literal('employee'),
+  campus,
+});
+
+const occupationStudent = z.object({
+  id: z.number(),
+  type: z.literal('student'),
+  campus,
+  course,
+  isFinished: z.boolean().optional(),
+});
+
+const peopleCollection = defineCollection({
   schema: z.object({
     id: z.number(),
     name: z.object({
@@ -33,38 +69,58 @@ const studentCollection = defineCollection({
       full: z.string(),
     }),
     avatar: z.string().url(),
-    courses: z.array(
-      z.object({
-        id: z.number(),
-        name: z.string(),
-        campus: z.string(),
-        isFinished: z.boolean().optional(),
-      })
+    occupations: z.array(
+      z.union([occupationProfessor, occupationStudent, occupationEmployee])
     ),
     addresses: z.object({
       github: z.string().url(),
       linkedin: z.string().url(),
       twitter: z.string().url().optional(),
       stackoverflow: z.string().url().optional(),
-      lattes: z.string().email().optional(),
-      researchgate: z.string().email().optional(),
-      instagram: z.string().email().optional(),
+      lattes: z.string().url().optional(),
+      researchgate: z.string().url().optional(),
+      instagram: z.string().url().optional(),
       email: z.string().email().optional(),
     }),
   }),
 });
 
+const subjectProject = z.object({
+  type: z.literal('subject'),
+  subject: z.string(),
+  semester: z.number(),
+  course,
+  campus,
+});
+
+const researchProject = z.object({
+  type: z.literal('research'),
+  campus,
+});
+
+const extensionProject = z.object({
+  type: z.literal('extension'),
+  campus,
+});
+
+const openSourceProject = z.object({
+  type: z.literal('open source'),
+  campus,
+});
+
 const projectCollection = defineCollection({
   schema: z.object({
-    title: z.string(),
+    name: z.string(),
     description: z.string(),
-    preview: z.string().url(),
-    page: z.string().url(),
-    repository: z.string().url(),
-    course: z.string(),
-    subject: z.string(),
-    semester: z.number(),
-    campus: z.string(),
+    repository: z.string().url().optional(),
+    preview: z.string().url().optional(),
+    page: z.string().url().optional(),
+    category: z.union([
+      subjectProject,
+      researchProject,
+      extensionProject,
+      openSourceProject,
+    ]),
     tags: z.array(z.string()),
     owners: z.array(
       z.object({
@@ -80,6 +136,6 @@ const projectCollection = defineCollection({
 export const collections = {
   subjects: subjectCollection,
   courses: courseCollection,
-  students: studentCollection,
+  students: peopleCollection,
   projects: projectCollection,
 };

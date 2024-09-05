@@ -19,7 +19,7 @@ const projectId = project?.data?.repository
 >
   <section class="relative">
     <figure class="overflow-hidden">
-      <a href={project.data.page} target="_blank">
+      <a href={project.data.page || project.data.repository} target="_blank">
         <img
           src={project.data.preview ?? '/imgs/project-placeholder.png'}
           alt={project.data.title}

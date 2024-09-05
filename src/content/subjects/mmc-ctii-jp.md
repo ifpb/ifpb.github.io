@@ -1,9 +1,9 @@
 ---
-id: mmc-ctiiem-jp
+id: mmc-ctii-jp
 name: Manutenção e Montagem de Computadores
 abbreviation: mmc
 description: Tem por objetivo o desenvolvimento de competências relativas à montagem e configuração de computadores.
-course: ctiiem
+course: ctii
 campus: ifpb-jp
 repository: https://github.com/maxwellamaral/maxwellamaral.github.io
 preview: https://maxwellamaral.github.io/lessons/hardware/

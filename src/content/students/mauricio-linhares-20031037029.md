@@ -4,10 +4,11 @@ name:
   compact: Mauricio Linhares
   full: Mauricio Linhares de Aragao Junior
 avatar: https://github.com/mauricio.png
-courses:
+occupations:
 - id: 20031037029
-  name: cstsi
+  type: student
   campus: ifpb-jp
+  course: cstsi
   isFinished: true
 addresses:
   github: https://github.com/mauricio

@@ -4,10 +4,11 @@ name:
   compact: Bruno Paulino
   full: Bruno de Araújo Paulino
 avatar: https://github.com/brunojppb.png
-courses:
+occupations:
 - id: 20111370307
-  name: cstsi
+  type: student
   campus: ifpb-jp
+  course: cstsi
   isFinished: true
 addresses:
   github: https://github.com/brunojppb

@@ -17,17 +17,46 @@ courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
       class="flex flex-col min-[425px]:flex-row min-[425px]:justify-between gap-10"
     >
       <section>
-        <h1 class="font-semibold">Projetos</h1>
+        <h1 class="font-semibold">Rede Social</h1>
         <ul>
           <li>
-            <a href="https://ifpb.github.io/projects/codes/page/1/">
-              Repositórios
+            <a href="https://www.linkedin.com/school/ifpb/"> IFPB </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/company/programa-de-p%C3%B3s-gradua%C3%A7%C3%A3o-em-tecnologia-da-informa%C3%A7%C3%A3o/posts/?feedView=all"
+            >
+              PPGTI
             </a>
           </li>
           <li>
-            <a href="https://ifpb.github.io/projects/people/page/1/"
-              >Alunos e Professores</a
+            <a
+              href="https://www.linkedin.com/company/assert-polo-embrapii/posts/?feedView=all"
             >
+              Assert
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/polo-de-inova%C3%A7%C3%A3o-do-ifpb-11bb871b3/recent-activity/all/"
+            >
+              Polo de Inovação
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h1 class="font-semibold">Links Úteis</h1>
+        <ul>
+          <li>
+            <a href="https://ifpb.github.io/projects/codes/page/1/">
+              Projetos do IFPB
+            </a>
+          </li>
+          <li>
+            <a href="https://ifpb.github.io/projects/people/page/1/">
+              Alunos e Professores
+            </a>
           </li>
           <li>
             <a href="https://ifpb.github.io/exercises/">Exercícios</a>
@@ -36,7 +65,12 @@ courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
             <a href="https://github.com/ifpb/maratona-pop">Maratona POP</a>
           </li>
           <li>
-            <a href="https://joaopessoa.ifpb.edu.br/horario/">Horários</a>
+            <a href="https://joaopessoa.ifpb.edu.br/horario/">
+              Horários (HIFPB)
+            </a>
+          </li>
+          <li>
+            <a href="https://ifpb.github.io/talks-iftech/">IFTech</a>
           </li>
         </ul>
       </section>
@@ -46,7 +80,9 @@ courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
           {
             courses.map((course) => (
               <li>
-                <a href={course.data.page}>{course.data.name}</a>
+                <a href={course.data.page}>
+                  {course.data.level.compact} em {course.data.name}
+                </a>
               </li>
             ))
           }

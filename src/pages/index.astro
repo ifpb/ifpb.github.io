@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import SimpleLayout from '../layouts/SimpleLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SubjectCard from '../components/SubjectCard.astro';
+import CompactSubjectCard from '../components/CompactSubjectCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StudentCard from '../components/StudentCard.astro';
 
@@ -25,9 +25,9 @@ const menu = [
 
 const selectedSubjects = [
   'aps-cstsi-jp',
-  'bd-mpti-jp',
+  'bd-cmpti-jp',
+  'lp2-ctii-jp',
   'ped-cstrc-jp',
-  'lp2-ctiiem-jp',
 ];
 
 const subjects = (await getCollection('subjects')).filter((subject) =>
@@ -63,7 +63,7 @@ const students = await getCollection('students');
           class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-5 items-stretch"
           style=""
         >
-          {subjects.map((subject) => <SubjectCard subject={subject} />)}
+          {subjects.map((subject) => <CompactSubjectCard subject={subject} />)}
         </div>
       </div>
     </section>

@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  subject: CollectionEntry<'subjects'>;
+}
+
+const {
+  subject: {
+    data: { name, description, course, campus, preview, repository },
+  },
+} = Astro.props;
+---
+
+<div class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4">
+  <a href={preview ?? repository} target="_blank">
+    <h1 class="text-xl font-bold mb-4">{name}</h1>
+  </a>
+  <p class="mb-4">
+    {description}
+  </p>
+  <ul class="flex">
+    <li class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full">
+      {course}
+    </li>
+    <li class="text-sm text-gray-700 bg-white my-2 mx-1 py-1 px-2 rounded-full">
+      {campus}
+    </li>
+  </ul>
+</div>
