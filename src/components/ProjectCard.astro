@@ -8,7 +8,7 @@ export interface Props {
 
 const { project } = Astro.props;
 
-const projectId = project?.data?.repository
+const projectId = project?.data?.addresses?.repository
   ?.split('github.com/')
   ?.at(-1)
   ?.replace('/', '-');
@@ -19,10 +19,14 @@ const projectId = project?.data?.repository
 >
   <section class="relative">
     <figure class="overflow-hidden">
-      <a href={project.data.page || project.data.repository} target="_blank">
+      <a
+        href={project.data.addresses.page || project.data.addresses.repository}
+        target="_blank"
+      >
         <img
-          src={project.data.preview ?? '/imgs/project-placeholder.png'}
-          alt={project.data.title}
+          src={project.data.addresses.preview ??
+            '/imgs/project-placeholder.png'}
+          alt={project.data.name}
           class="bg-gray-300 object-cover w-full h-[200px] md:h-[150px] hover:scale-105 transition duration-500"
           onload="this.onload=null;this.classList.remove('animate-pulse');"
           onerror="this.onerror=null;this.classList.remove('animate-pulse', 'bg-neutral-400');this.src='/imgs/project-placeholder.png';"
@@ -30,7 +34,11 @@ const projectId = project?.data?.repository
       </a>
     </figure>
     <div class="absolute top-2 right-2">
-      <a href={project.data.repository} target="_blank" class="font-bold">
+      <a
+        href={project.data.addresses.repository}
+        target="_blank"
+        class="font-bold"
+      >
         <Icon name="uim:github" size={32} class="github-project-link" />
       </a>
     </div>
@@ -40,7 +48,7 @@ const projectId = project?.data?.repository
           <li class="-mr-2 border-2 border-gray-100 rounded-full">
             <a href={owner.github} target="_blank">
               <img
-                src={`${owner.avatar}?size=32`}
+                src={`${owner.github}.png?size=32`}
                 alt={owner.name}
                 title={owner.name}
                 class="rounded-full"
@@ -57,7 +65,7 @@ const projectId = project?.data?.repository
       target="_blank"
       class="font-bold"
     >
-      {project.data.title}
+      {project.data.name}
     </a>
   </p>
 </div>

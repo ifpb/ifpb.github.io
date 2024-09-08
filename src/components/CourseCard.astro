@@ -1,0 +1,63 @@
+---
+import { Icon } from 'astro-icon';
+import type { CollectionEntry } from 'astro:content';
+
+export interface Props {
+  course: CollectionEntry<'courses'>;
+}
+
+const icons = [
+  {
+    name: 'homepage',
+    icon: 'ph:browsers',
+  },
+  {
+    name: 'linkedin',
+    icon: 'ph:linkedin-logo',
+  },
+  {
+    name: 'instagram',
+    icon: 'ph:instagram-logo',
+  },
+];
+
+const {
+  course: {
+    data: {
+      name,
+      addresses,
+      level: { compact },
+    },
+  },
+} = Astro.props;
+
+const links = icons
+  .filter((link) => addresses[link.name])
+  .map((link) => ({
+    ...link,
+    url: addresses[link.name],
+  }));
+---
+
+<div class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4">
+  <a href={addresses.homepage} target="_blank">
+    <h1 class="text-lg font-bold mb-4">{compact} em {name}</h1>
+  </a>
+  <div class="flex justify-start pb-2">
+    {
+      links.map((link) => (
+        <a
+          href={link.url}
+          target="_blank"
+          class="hover:scale-110 transition duration-500"
+        >
+          <Icon
+            name={link.icon}
+            size={32}
+            class={`${link.name}-student-link`}
+          />
+        </a>
+      ))
+    }
+  </div>
+</div>

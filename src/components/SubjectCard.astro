@@ -12,25 +12,27 @@ const courses = await getCollection('courses');
 
 const {
   subject: {
-    data: { name, description, course, campus, preview, professors, repository },
+    data: { name, description, course, professors, addresses },
   },
 } = Astro.props;
 
-const getCourseByName = (abbreviation: string) => {
+const link = addresses?.homepage || addresses.repository;
+
+const getCourseByAbbreviation = (abbreviation: string) => {
   return courses.find((course) => course?.data?.abbreviation === abbreviation);
 };
 ---
 
 <div class="relative bg-gray-100 mb-4 p-4 border-l-8 border-green-900">
-  <a href={preview ?? repository}>
+  <a href={link}>
     <h2 class="text-2xl font-bold mb-4 pr-2">{name}</h2>
   </a>
   <h2 class="text-lg font-semibold mb-1">Curso</h2>
   <p class="mb-4">
-    {getCourseByName(course)?.data?.level?.full} em{' '}
-    {getCourseByName(course)?.data?.name}
+    {getCourseByAbbreviation(course)?.data?.level?.full} em{' '}
+    {getCourseByAbbreviation(course)?.data?.name}
     <span class="uppercase">
-      ({getCourseByName(course)?.data?.campus})
+      ({getCourseByAbbreviation(course)?.data?.campus})
     </span>
   </p>
   <h2 class="text-lg font-semibold mb-1">Professores</h2>
@@ -39,7 +41,7 @@ const getCourseByName = (abbreviation: string) => {
   <p class="mb-4">{description}</p>
   <div class="absolute top-4 right-4">
     <a
-      href={repository}
+      href={addresses.repository}
       class="hover:text-gray-600 transition duration-500"
     >
       <Icon name="mdi:github" size={30} class="github-project-link" />

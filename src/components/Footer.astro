@@ -1,9 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 
-const courses = await getCollection('courses');
+const courses = (await getCollection('courses')).filter(
+  (course) =>
+    course.data.department.includes('Informação') &&
+    course.data.status !== 'inactive'
+);
 
-courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
+courses.sort((a, b) =>
+  a.data.level.compact.localeCompare(b.data.level.compact)
+);
 ---
 
 <footer>
@@ -20,7 +26,7 @@ courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
         <h1 class="font-semibold">Rede Social</h1>
         <ul>
           <li>
-            <a href="https://www.linkedin.com/school/ifpb/"> IFPB </a>
+            <a href="https://www.linkedin.com/school/ifpb/"> IFPB</a>
           </li>
           <li>
             <a
@@ -74,20 +80,20 @@ courses.sort((a, b) => a.data.name.localeCompare(b.data.name));
           </li>
         </ul>
       </section>
-      <section>
+      <!-- <section>
         <h1 class="font-semibold">Cursos</h1>
         <ul>
           {
             courses.map((course) => (
               <li>
-                <a href={course.data.page}>
+                <a href={course?.data?.addresses?.homepage}>
                   {course.data.level.compact} em {course.data.name}
                 </a>
               </li>
             ))
           }
         </ul>
-      </section>
+      </section> -->
     </div>
   </div>
 </footer>

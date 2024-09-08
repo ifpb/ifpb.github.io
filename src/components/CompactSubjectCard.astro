@@ -7,13 +7,19 @@ export interface Props {
 
 const {
   subject: {
-    data: { name, description, course, campus, preview, repository },
+    data: {
+      name,
+      description,
+      course,
+      campus,
+      addresses: { homepage, repository },
+    },
   },
 } = Astro.props;
 ---
 
 <div class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4">
-  <a href={preview ?? repository} target="_blank">
+  <a href={homepage ?? repository} target="_blank">
     <h1 class="text-xl font-bold mb-4">{name}</h1>
   </a>
   <p class="mb-4">
