@@ -1,6 +1,4 @@
 ---
-import { string } from 'astro/zod';
-
 export interface MenuItem {
   name: string;
   link: string;
@@ -18,7 +16,7 @@ const { menu, title }: Props = Astro.props;
   class="flex flex-col items-center justify-center relative bg-[url('/imgs/ifpb-jp.png')] bg-[#0B3314]/70 bg-cover bg-blend-multiply h-[30vh] min-h-[300px] px-8"
 >
   <div
-    class="container lg:max-w-screen-lg mx-auto py-4 flex justify-between items-center absolute top-0"
+    class="container hidden sm:flex justify-between items-center absolute top-0 lg:max-w-screen-lg mx-auto py-4 px-8"
   >
     <a href="/">
       <img src="/imgs/ifpb-logo.svg" alt="Logo do IFPB" class="w-7" />
@@ -35,3 +33,14 @@ const { menu, title }: Props = Astro.props;
   </div>
   <h1 class="text-4xl text-white">{title}</h1>
 </header>
+<ul
+  class="max-sm:flex flex-wrap justify-center sm:hidden gap-2 my-2 mx-8 font-semibold"
+>
+  {
+    menu.map(({ name, link }) => (
+      <li>
+        <a href={link}>{name}</a>
+      </li>
+    ))
+  }
+</ul>

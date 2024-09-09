@@ -11,6 +11,10 @@ import CourseCard from '../components/CourseCard.astro';
 
 const menu = [
   {
+    name: 'Cursos',
+    link: '#courses',
+  },
+  {
     name: 'Disciplinas',
     link: '#subjects',
   },
@@ -144,7 +148,9 @@ const students = await getCollection('students');
             </a>
           </p>
         </div>
-        <div class="text-black grid grid-cols-1 md:grid-cols-4 gap-5">
+        <div
+          class="text-black grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-items-center gap-5"
+        >
           {students.map((student) => <StudentCard student={student} />)}
         </div>
       </div>
