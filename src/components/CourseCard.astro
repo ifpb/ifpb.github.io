@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon';
+import { campi } from '../content/config';
 import type { CollectionEntry } from 'astro:content';
 
 export interface Props {
@@ -26,23 +27,35 @@ const {
     data: {
       name,
       addresses,
+      abbreviation,
+      campus,
       level: { compact },
     },
   },
-} = Astro.props;
+}: Props = Astro.props;
 
 const links = icons
-  .filter((link) => addresses[link.name])
-  .map((link) => ({
-    ...link,
-    url: addresses[link.name],
+  .filter((icon) => addresses && addresses[icon.name as keyof typeof addresses])
+  .map((icon) => ({
+    ...icon,
+    url: addresses && addresses[icon.name as keyof typeof addresses],
   }));
 ---
 
 <div class="subject-card rounded-md overflow-hidden shadow-lg bg-gray-100 p-4">
-  <a href={addresses.homepage} target="_blank">
-    <h1 class="text-lg font-bold mb-4">{compact} em {name}</h1>
+  <a href={addresses?.homepage} target="_blank">
+    <h1 class="text-lg font-bold mb-4">
+      {compact} em {name}
+    </h1>
   </a>
+  <p class="mb-4">
+    <span
+      class="text-sm text-gray-700 bg-white my-2 mr-1 py-1 px-2 rounded-full"
+    >
+      {campi[campus]}
+    </span>
+  </p>
+
   <div class="flex justify-start pb-2">
     {
       links.map((link) => (

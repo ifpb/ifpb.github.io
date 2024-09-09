@@ -48,15 +48,15 @@ const students = await getCollection('students');
 ---
 
 <SimpleLayout title="Github do IFPB">
-  <Header menu={menu} />
+  <Header menu={menu} title="Departamento de Informática" />
   <main>
-    <section id="courses" class="courses-section bg-white px-8 py-16">
+    <section id="courses" class="courses-section bg-white px-8 py-28">
       <div class="container lg:max-w-screen-lg mx-auto flex flex-col gap-10">
         <div>
           <h2 class="text-4xl font-bold mb-4">Cursos</h2>
           <p class="mb-4">
-            Aqui você encontra os cursos ofertadas no Departamento de
-            Informática do campus João Pessoa.
+            Venha conhecer os cursos ofertadas no Departamento de Informática do
+            IFPB.
           </p>
         </div>
         <div
@@ -67,7 +67,7 @@ const students = await getCollection('students');
         </div>
       </div>
     </section>
-    <section id="subjects" class="subjects-section bg-[#0B3314] px-8 py-16">
+    <section id="subjects" class="subjects-section bg-[#0B3314] px-8 py-28">
       <div
         class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
       >
@@ -93,14 +93,14 @@ const students = await getCollection('students');
         </div>
       </div>
     </section>
-    <section id="projects" class="projects-section bg-white px-8 py-16">
+    <section id="projects" class="projects-section bg-white px-8 py-28">
       <div
         class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
       >
         <div class="-order-1 md:order-1">
           <h2 class="text-4xl font-bold mb-4">Projetos</h2>
           <p class="mb-4">
-            Esse é um preview dos vários projetos feitos pelos nossos alunos.
+            Esse é um portal dos vários projetos feitos pelos nossos alunos.
           </p>
           <p>
             <a
@@ -119,11 +119,11 @@ const students = await getCollection('students');
         </div>
       </div>
     </section>
-    <!-- <section id="research" class="research-section bg-white px-8 py-16">
+    <!-- <section id="research" class="research-section bg-white px-8 py-28">
     </section> -->
     <section
       id="students"
-      class="students-section bg-black text-white px-8 py-16"
+      class="students-section bg-black text-white px-8 py-28"
     >
       <div
         class="container lg:max-w-screen-lg mx-auto flex flex-col md:flex-row gap-10"
@@ -131,8 +131,8 @@ const students = await getCollection('students');
         <div>
           <h2 class="text-4xl font-bold mb-4">Alunos</h2>
           <p class="mb-4">
-            Aqui você poderá encontrar portfólio e contato de estudantes e
-            egressos de vários cursos do IFPB.
+            Aqui você poderá encontrar portfólio e contato de estudantes do
+            IFPB.
           </p>
           <p>
             <a

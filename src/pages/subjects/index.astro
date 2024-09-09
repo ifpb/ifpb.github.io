@@ -17,21 +17,13 @@ const menu = [
     link: '#subjects',
   },
 ];
-
-
 ---
 
 <SimpleLayout title="Disciplinas">
-  <Header menu={menu} />
+  <Header menu={menu} title="Departamento de Informática" />
   <main class="container lg:max-w-screen-lg mx-auto pt-16 px-2">
     <h1 id="subjects" class="text-4xl font-bold mb-16">Disciplinas</h1>
-    {
-      subjects.map(
-        (subject) => (
-          <SubjectCard subject={subject} />
-        )
-      )
-    }
+    {subjects.map((subject) => <SubjectCard subject={subject} />)}
   </main>
   <Footer />
 </SimpleLayout>

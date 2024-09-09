@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Icon from 'astro-icon';
 
 import type { CollectionEntry } from 'astro:content';
+import { campi } from '../content/config';
 
 export interface Props {
   subject: CollectionEntry<'subjects'>;
@@ -14,9 +15,9 @@ const {
   subject: {
     data: { name, description, course, professors, addresses },
   },
-} = Astro.props;
+}: Props = Astro.props;
 
-const link = addresses?.homepage || addresses.repository;
+const link = addresses?.homepage || addresses?.repository;
 
 const getCourseByAbbreviation = (abbreviation: string) => {
   return courses.find((course) => course?.data?.abbreviation === abbreviation);
@@ -25,26 +26,43 @@ const getCourseByAbbreviation = (abbreviation: string) => {
 
 <div class="relative bg-gray-100 mb-4 p-4 border-l-8 border-green-900">
   <a href={link}>
-    <h2 class="text-2xl font-bold mb-4 pr-2">{name}</h2>
+    <h2 class="text-2xl font-bold inline-block mb-4 pr-2">{name}</h2>
   </a>
   <h2 class="text-lg font-semibold mb-1">Curso</h2>
   <p class="mb-4">
     {getCourseByAbbreviation(course)?.data?.level?.full} em{' '}
     {getCourseByAbbreviation(course)?.data?.name}
-    <span class="uppercase">
-      ({getCourseByAbbreviation(course)?.data?.campus})
-    </span>
+  </p>
+  <h2 class="text-lg font-semibold mb-1">Campus</h2>
+  <p class="mb-4">
+    {campi[getCourseByAbbreviation(course)?.data?.campus as keyof typeof campi]}
   </p>
   <h2 class="text-lg font-semibold mb-1">Professores</h2>
   <p class="mb-4">{professors.join(', ')}</p>
   <h2 class="text-lg font-semibold mb-1">Descrição</h2>
   <p class="mb-4">{description}</p>
-  <div class="absolute top-4 right-4">
-    <a
-      href={addresses.repository}
-      class="hover:text-gray-600 transition duration-500"
-    >
-      <Icon name="mdi:github" size={30} class="github-project-link" />
-    </a>
+  <h2 class="text-lg font-semibold mb-1">Links</h2>
+  <ul class="mb-4">
+    {
+      Object.entries(addresses).map(([name, link]) => (
+        <li>
+          <a class="underline" href={link}>
+            {name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <div class="absolute top-4 right-4 z-10">
+    {
+      addresses?.repository && (
+        <a
+          href={addresses?.repository}
+          class="hover:cursor-pointer hover:text-gray-600 transition duration-500"
+        >
+          <Icon name="mdi:github" size={30} class="github-project-link" />
+        </a>
+      )
+    }
   </div>
 </div>

@@ -2,7 +2,7 @@
 id: 20031037029
 name:
   compact: Mauricio Linhares
-  full: Mauricio Linhares de Aragao Junior
+  full: Maurício Linhares de Aragão Junior
 avatar: https://github.com/mauricio.png
 occupations:
 - id: 20031037029

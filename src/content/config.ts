@@ -6,7 +6,16 @@ const id = z.number().refine((num) => {
   return [12, 11, 7].includes(length);
 });
 
-const campus = z.enum(['ifpb-jp', 'ifpb-cg', 'ifpb-gb', 'reitoria']);
+export const campi = {
+  'ifpb-jp': 'João Pessoa',
+  'ifpb-cg': 'Campina Grande',
+  'ifpb-gb': 'Guarabira',
+  reitoria: 'Reitoria',
+};
+
+const campusCode = Object.keys(campi) as [keyof typeof campi];
+
+const campus = z.enum(campusCode);
 
 const course = z.enum([
   'cstsi',
@@ -96,7 +105,9 @@ const subjectCollection = defineCollection({
     course,
     campus,
     professors: z.array(z.string()),
-    addresses: addresses.optional(),
+    addresses: addresses.extend({
+      repository: z.string().url().optional(),
+    }),
   }),
 });
 
